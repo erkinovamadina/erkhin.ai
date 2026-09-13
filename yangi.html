@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>erkhins.ai — AI Video Darslar va Resurslar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .glow-1 {
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            width: 450px;
+            height: 450px;
+            background: rgba(168, 85, 247, 0.35);
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .glow-2 {
+            position: fixed;
+            top: 40%;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: rgba(56, 189, 248, 0.25);
+            filter: blur(160px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .glow-3 {
+            position: fixed;
+            bottom: -100px;
+            left: 30%;
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.3);
+            filter: blur(150px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #c084fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            padding: 12px 28px;
+            border-radius: 30px;
+            background: rgba(168, 85, 247, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: rgba(168, 85, 247, 0.45);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 28px rgba(168, 85, 247, 0.4);
+        }
+
+        .hero {
+            padding: 180px 8% 60px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #c084fc;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #c084fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+        }
+
+        .courses-section, .channels-section {
+            padding: 40px 8%;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(192, 132, 252, 0.4);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.25);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 190px;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .thumbnail iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+        }
+
+        .telegram-preview {
+            width: 100%;
+            height: 190px;
+            background: rgba(56, 189, 248, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-content {
+            padding: 22px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 14px;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .free-badge {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .channel-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .channel-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .channel-desc {
+            font-size: 0.88rem;
+            color: #9ca3af;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .channel-btn {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .channel-btn:hover {
+            background: rgba(56, 189, 248, 0.3);
+            color: #ffffff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+    <div class="glow-3"></div>
+
+    <nav>
+        <div class="logo">erkhins.ai</div>
+        <ul class="nav-links">
+            <li><a href="#courses">Darslar</a></li>
+            <li><a href="#channels">Kanallar va Loyihalar</a></li>
+        </ul>
+        <a href="https://t.me/+3Lv9cIGlWeVlMDdk" target="_blank" class="btn-primary">Kanalga Qo'shilish 🚀</a>
+    </nav>
+
+    <section class="hero">
+        <span class="badge">✨ 100% Bepul AI Video Darsliklar</span>
+        <h1>Sun'iy Intellekt bilan <span>Videolar Yaratishni</span> Tekin O'rganing</h1>
+        <p>AIni noldan boshlab professional darajagacha o'rganing. Video montaj, neyrotarmoqlar va amaliy darslar.</p>
+        <a href="#courses" class="btn-primary" style="padding: 16px 36px; font-size: 1.1rem;">Darslarni Ko'rish 👇</a>
+    </section>
+
+    <!-- AI Amaliy Darslar -->
+    <section class="courses-section" id="courses">
+        <div class="section-title">
+            <h2>🎬 Amaliy Video Darslar</h2>
+        </div>
+
+        <div class="course-grid">
+            <!-- 1-Dars -->
+            <div class="course-card">
+                <div class="thumbnail">
+                    <iframe src="https://www.youtube.com/embed/NrtIrGMG7hA" title="1-Amaliy Dars" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Asosiy Dars</div>
+                        <h3 class="card-title">1-Amaliy Dars</h3>
+                        <p class="card-desc">AI bilan ishlashni noldan boshlash va asosiy instrumentlar bilan tanishish.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 01</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 2-Dars -->
+            <div class="course-card">
+                <div class="thumbnail">
+                    <iframe src="https://www.youtube.com/embed/P2HCxz3vF6M" title="Kiyimni Almashtirish" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Amaliy Dars</div>
+                        <h3 class="card-title">2-Kiyimni Almashtirish</h3>
+                        <p class="card-desc">AI yordamida videolardagi kiyimlarni osongina almashtirish usuli.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 02</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 3-Dars (Telegram) -->
+            <div class="course-card">
+                <div class="telegram-preview">
+                    <span style="font-size: 2.5rem;">✈️</span>
+                    <a href="https://t.me/c/3974465998/160" target="_blank" class="channel-btn">Telegram'da Ko'rish ↗</a>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Layfhak</div>
+                        <h3 class="card-title">3-Bonuslaringiz Tugamaydi</h3>
+                        <p class="card-desc">AI servislardan doimiy bonus va kreditlar olish yo'llari.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 03</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 4-Dars (Telegram) -->
+            <div class="course-card">
+                <div class="telegram-preview">
+                    <span style="font-size: 2.5rem;">✈️</span>
+                    <a href="https://t.me/c/3974465998/196" target="_blank" class="channel-btn">Telegram'da Ko'rish ↗</a>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Amaliy Dars</div>
+                        <h3 class="card-title">4-Google Acaunt Ochish</h3>
+                        <p class="card-desc">Ko'p miqdorda to'g'ri Google akkountlarni ro'yxatdan o'tkazish.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 04</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 5-Dars -->
+            <div class="course-card">
+                <div class="thumbnail">
+                    <iframe src="https://www.youtube.com/embed/F_f_2aNRuV8" title="FLOW Acaunt" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Amaliy Dars</div>
+                        <h3 class="card-title">5-FLOW'da Boshqa Acauntga O'tish</h3>
+                        <p class="card-desc">FLOW platformasida akkountlarni tez va xavfsiz almashtirish.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 05</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 6-Dars (Telegram) -->
+            <div class="course-card">
+                <div class="telegram-preview">
+                    <span style="font-size: 2.5rem;">✈️</span>
+                    <a href="https://t.me/c/3974465998/205" target="_blank" class="channel-btn">Telegram'da Ko'rish ↗</a>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Murakkab Dars</div>
+                        <h3 class="card-title">6-Uzun Video / Bir Xil Personaj</h3>
+                        <p class="card-desc">Uzun soniyali videolar yaratish va bir xil personajni saqlab qolish.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 06</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+
+            <!-- 7-Dars -->
+            <div class="course-card">
+                <div class="thumbnail">
+                    <iframe src="https://www.youtube.com/embed/IJBEtx9j5uY" title="Musiqa Yaratish" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-tag">Audio AI</div>
+                        <h3 class="card-title">7-Musiqa Yaratish</h3>
+                        <p class="card-desc">AI yordamida mualliflik huquqisiz original musiqalar yaratish.</p>
+                    </div>
+                    <div class="card-footer"><span>Dars 07</span><span class="free-badge">BEPUL</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kanallar va Alohida Kurslar -->
+    <section class="channels-section" id="channels">
+        <div class="section-title">
+            <h2>🔗 Kanallar va Maxsus Resurslar</h2>
+        </div>
+
+        <div class="channel-grid">
+            
+            <!-- Digital Reselling Kartochkasi (Yangi Telegram Link Bilan) -->
+            <div class="channel-card" style="border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.05);">
+                <div>
+                    <div class="card-tag" style="color: #c084fc;">AMALIY KURS</div>
+                    <h3 class="channel-title">💼 Digital Reselling & Vositachilik</h3>
+                    <p class="channel-desc">Obunalar vositachiligi, virtual kartalar ochish va botlar bilan ishlash kursi.</p>
+                </div>
+                <a href="https://t.me/erkinova_kamandasi" target="_blank" class="channel-btn" style="background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4); color: #c084fc;">Kanalga Kirish ➔</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">👤 Men Haqimda</h3>
+                    <p class="channel-desc">Loyiha muallifi va tajribam haqida batafsil ma'lumot.</p>
+                </div>
+                <a href="https://t.me/vip_erkinovamadina" target="_blank" class="channel-btn">Ko'rish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">✨ Prompt Kanal (Qizlar uchun)</h3>
+                    <p class="channel-desc">Faqat qizlar uchun maxsus tayyorlangan estetik AI promptlar kanali.</p>
+                </div>
+                <a href="https://t.me/kanallarimabaut" target="_blank" class="channel-btn">Kanalga Kirish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">⏱ Video Davomiyligini Ko'paytirish</h3>
+                    <p class="channel-desc">Videolar davomiyligini uzaytirish bo'yicha maxsus qo'llanma.</p>
+                </div>
+                <a href="https://t.me/c/3974465998/161" target="_blank" class="channel-btn">Postni O'qish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">🧠 Ajoyib Psixologik Metodika</h3>
+                    <p class="channel-desc">Foydali va qiziqarli psixologik metodikalar to'plami.</p>
+                </div>
+                <a href="https://t.me/ai_metodikalar" target="_blank" class="channel-btn">O'tish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">💰 AI Content va Daromad</h3>
+                    <p class="channel-desc">AI orqali kontentlar yaratib pul topish yo'llari haqida.</p>
+                </div>
+                <a href="https://t.me/c/3974465998/244" target="_blank" class="channel-btn">Ko'rish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">🌙 Oneiralogiya (Tushlar haqida)</h3>
+                    <p class="channel-desc">Tushlar va ularning psixologik tahliliga bag'ishlangan kanal.</p>
+                </div>
+                <a href="https://t.me/kanallarimabaut" target="_blank" class="channel-btn">Kanalga Kirish ↗</a>
+            </div>
+
+            <div class="channel-card">
+                <div>
+                    <h3 class="channel-title">🛍 Xitoydan Tovar Buyurtma Qilish</h3>
+                    <p class="channel-desc">Xitoy saytlaridan tovarlarni to'g'ridan-to'g'ri zakaz qilish bo'yicha qo'llanma.</p>
+                </div>
+                <a href="https://t.me/+zDaI7bCE2Dc0Y2Jk" target="_blank" class="channel-btn">Ko'rish ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; erkhins.ai — Barcha AI darslar va resurslar.</p>
+    </footer>
+
+</body>
+</html>
